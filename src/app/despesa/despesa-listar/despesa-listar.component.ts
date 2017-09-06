@@ -20,8 +20,8 @@ import { SelectComponent, SelectItem } from "ng2-select";
 export class DespesaListarComponent extends BaseComponent implements OnInit {
   @ViewChild('SelectMeses') selectMeses: SelectComponent;
 
-  public despesas:Despesa[];
-  public meses:any[];
+  despesas:Despesa[];
+  itensMeses:any[];
   formulario: FormGroup;
   mes:number;
   total:Number;
@@ -50,8 +50,7 @@ export class DespesaListarComponent extends BaseComponent implements OnInit {
     this.homeService.listarMeses()
     .subscribe(
       api => {
-        this.meses = api;
-        this.meses.forEach(item => {
+        api.forEach(item => {
           item.mes = item.mes.toString();
           this.selectMeses.itemObjects.push(new SelectItem({ id: item.mes, text: item.nome }));
         })

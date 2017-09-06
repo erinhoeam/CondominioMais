@@ -22,8 +22,8 @@ export class RecebimentoListarComponent extends BaseComponent implements OnInit 
   @ViewChild('SelectMeses') selectMeses: SelectComponent;
   @ViewChild('childModal') public childModal:ModalDirective;
   
-  public recebimentos:Recebimento[];
-  public meses:any[];
+  recebimentos:Recebimento[];
+  itensMeses:any[];
   formulario: FormGroup;
   mes:number;
   total:number;
@@ -56,8 +56,7 @@ export class RecebimentoListarComponent extends BaseComponent implements OnInit 
     this.homeService.listarMeses()
     .subscribe(
       api => {
-        this.meses = api;
-        this.meses.forEach(item => {
+        api.forEach(item => {
           item.mes = item.mes.toString();
           this.selectMeses.itemObjects.push(new SelectItem({ id: item.mes, text: item.nome }));
         })
