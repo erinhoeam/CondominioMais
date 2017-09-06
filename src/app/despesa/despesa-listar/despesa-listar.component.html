@@ -1,0 +1,54 @@
+<app-menu-superior></app-menu-superior>
+<div class="row">
+  <div class="col-sm-3 col-md-2 sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">{{title}}</h1>
+    <form novalidate [formGroup]="formulario">
+      <a class="btn btn-primary" [routerLink]="['/despesa/novo']" >Nova Despesa</a>
+      <br /><br />
+        <div class="row">
+          <div class="col-md-5">
+            <ng-select #SelectMeses [allowClear]="true" [items]="meses" placeholder="Selecione o Mês" 
+                (selected)="selectedMes($event.id)" ></ng-select>
+          </div>
+          <div class="col-md-5">
+            <input class="form-control" type="number" id="ano" formControlName="ano" placeholder="Ano" />
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary" (click)="listarDespesas()">Listar</button>
+          </div>
+        </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          <span class="bold">Total:&nbsp;</span><span>{{total | currencyformat}}</span>
+        </div>
+        <br />
+      </div>
+      <table class="table table-striped" *ngIf="despesas != null && despesas.length>0">
+        <tr>
+          <th>Forncedor</th>
+          <th>Centro de Custo</th>
+          <th>Vencimento</th>
+          <th>Valor</th>
+          <th>Editar</th>
+          <th>Excluir</th>
+        </tr>
+        <tbody>
+          <tr *ngFor='let item of despesas'>
+              <td width="35%">{{item.fornecedor.nome}}</td>
+              <td width="30%">{{item.centroCusto.nome}}</td>
+              <td width="15%">{{item.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+              <td width="10%">{{item.valorDespesa | currencyformat}}</td>
+              <td width="5%"><a [routerLink]="['/despesa/editar/' + item.id]" class="btn btn-primary">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+              <td width="5%"><a [routerLink]="['/despesa/editar/' + item.id]" class="btn btn-primary">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </form> 
+  </div>
+</div>

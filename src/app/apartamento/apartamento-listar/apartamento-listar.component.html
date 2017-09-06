@@ -1,0 +1,43 @@
+<app-menu-superior></app-menu-superior>
+<div class="row">
+  <div class="col-sm-3 col-md-2 sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">{{title}}</h1>
+    <a class="btn btn-primary" [routerLink]="['/apartamento/novo']" >Novo Apartamento</a>
+    <br /><br />
+    
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="edificioId">Edificio</label>
+        <div class="col-md-6">
+          <ng-select #SelectEdificio [allowClear]="true" [items]="itemsEdificio" placeholder="Selecione o Edificio" 
+              (selected)="selectedEdificio($event.id)" ></ng-select>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-primary" (click)="listarApartamentos()">Listar</button>
+        </div>
+      </div>
+    <hr />
+     <table class="table table-striped" *ngIf="apartamentos != null && apartamentos.length>0">
+      <tr>
+        <th>Numero</th>
+        <th>Morador</th>
+        <th>Edificio</th>
+        <th>Editar</th>
+        <th>Excluir</th>
+      </tr>
+      <tbody>
+        <tr *ngFor='let item of apartamentos'>
+            <td width="10%">{{item.numero}}</td>
+            <td width="40%">{{item.morador.nome}}</td>
+            <td width="40%">{{item.edificio.nome}}</td>
+            <td width="5%"><a [routerLink]="['/apartamento/editar/' + item.id]" class="btn btn-primary">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+            <td width="5%"><a [routerLink]="['/apartamento/editar/' + item.id]" class="btn btn-primary">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+        </tr>
+      </tbody>
+    </table> 
+  </div>
+</div>

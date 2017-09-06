@@ -1,0 +1,121 @@
+<div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-money"></i> <span class="bold">Boletos</span>
+        </div>
+        <div class="panel-body">
+          
+          <div class="row" *ngFor="let apartamento of boletos">
+
+            <div class="col-xs-4" *ngFor="let recebimento of apartamento.recebimentos">
+
+                <div class="panel" [ngClass]="{ 'panel-danger': recebimento.pago === 2, 'panel-warning': recebimento.pago === 1, 'panel-success': recebimento.pago === 3 }">
+                    <div class="panel-heading">
+                      <i class="fa fa-money"></i> <span class="bold">
+                        AP: {{apartamento.numero}}&nbsp;
+                        <b>{{recebimento.mensagemPagamento}}</b> - {{recebimento.mesAnoVencimento}} - 
+                        {{recebimento.valorRecebimento | currencyformat}}&nbsp;-&nbsp;{{recebimento.dataVencimento | date: 'dd/MM/yyyy'}}</span>
+                    </div>
+                    <div class="panel-body">
+                        <p style="text-align: center"><a href="#" target="blank"
+                          [routerLink]="['/recebimento/boleto/' + recebimento.id]" >2º Via Boleto</a></p>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-bar-chart"></i> <span class="bold">Gráfico Recebimentos X Despesas</span>
+      </div>
+      <div class="panel-body">
+        <chart [options]="options"></chart>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="balanco">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-bar-chart"></i> <span class="bold">Caixa Edifício</span>
+      </div>
+      <div class="panel-body">
+        <table>
+          <tr>
+            <td>Recebimento&nbsp;</td>
+            <td class="green">&nbsp;{{balanco.totalRecebimentos | currencyformat}}</td>
+          </tr>
+          <tr>
+              <td>Despesas&nbsp;</td>
+              <td class="red">&nbsp;{{balanco.totalDespesas | currencyformat}}</td>
+          </tr>
+          <tr>
+              <td>Saldo&nbsp;</td>
+              <td [ngClass]="{ 'green': balanco.saldo>=0, 'red': balanco.saldo<0 }">{{balanco.saldo | currencyformat}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <i class="fa fa-calculator"></i> <span class="bold">Despesas</span>
+      </div>
+      <div class="panel-body">
+        <form novalidate [formGroup]="formulario">
+          <br /><br />
+            <div class="row">
+              <div class="col-xs-5">
+                <ng-select #SelectMeses [allowClear]="true" [items]="meses" placeholder="Selecione o Mês" 
+                    (selected)="selectedMes($event.id)" ></ng-select>
+              </div>
+              <div class="col-xs-5">
+                <input class="form-control" type="number" id="ano" formControlName="ano" placeholder="Ano" />
+              </div>
+              <div class="col-xs-2">
+                <button class="btn btn-primary" (click)="listarDespesas()">Listar</button>
+              </div>
+            </div>
+          <hr />
+          <div class="row">
+            <div class="col-xs-12">
+              <span class="bold">Total:&nbsp;</span><span>{{total | currencyformat}}</span>
+            </div>
+            <br />
+          </div>
+          <table class="table table-striped" *ngIf="despesas != null && despesas.length>0">
+            <tr>
+              <th>Forncedor</th>
+              <th>Centro de Custo</th>
+              <th>Vencimento</th>
+              <th>Valor</th>
+            </tr>
+            <tbody>
+              <tr *ngFor='let item of despesas'>
+                  <td width="40%">{{item.fornecedor.nome}}</td>
+                  <td width="35%">{{item.centroCusto.nome}}</td>
+                  <td width="15%">{{item.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+                  <td width="10%">{{item.valorDespesa | currencyformat}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>

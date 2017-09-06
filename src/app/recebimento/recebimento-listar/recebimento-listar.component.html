@@ -1,0 +1,82 @@
+<app-menu-superior></app-menu-superior>
+<div class="row">
+  <div class="col-sm-3 col-md-2 sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">{{title}}</h1>
+    <form novalidate [formGroup]="formulario">
+      <a class="btn btn-primary" [routerLink]="['/recebimento/novo']" >Novo Recebimento</a>&nbsp;&nbsp;
+      <a class="btn btn-primary" [routerLink]="['/recebimento/boletos']" >Gerar Boletos AP</a>
+      <br /><br />
+        <div class="row">
+          <div class="col-md-5">
+            <ng-select #SelectMeses [allowClear]="true" [items]="meses" placeholder="Selecione o Mês" 
+                (selected)="selectedMes($event.id)" ></ng-select>
+          </div>
+          <div class="col-md-5">
+            <input class="form-control" type="number" id="ano" formControlName="ano" placeholder="Ano" />
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary" (click)="listarRecebimentos()">Listar</button>
+          </div>
+        </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          <span class="bold">Total:&nbsp;</span><span>{{total | currencyformat}}</span>
+        </div>
+        <br />
+      </div>
+      <table class="table table-striped" *ngIf="recebimentos != null && recebimentos.length>0">
+        <tr>
+          <th>Apartamento</th>
+          <th>Cliente</th>
+          <th>Centro de Custo</th>
+          <th>Vencimento</th>
+          <th>Valor</th>
+          <th>Pago</th>
+          <th>Editar</th>
+          <th>Baixar</th>
+          <th>Status</th>
+          <!-- <th>Excluir</th> -->
+        </tr>
+        <tbody>
+          <tr *ngFor='let item of recebimentos'>
+              <td width="5%">{{ item.apartamento ? item.apartamento.numero : ''}}</td>
+              <td width="35%">{{item.cliente ? item.cliente.nome: ''}}</td>
+              <td width="15%">{{item.centroCusto.nome}}</td>
+              <td width="15%">{{item.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+              <td width="10%">{{item.valorRecebimento | currencyformat}}</td>
+              <td width="10%">{{item.valorPago | currencyformat}}</td>
+              <td width="5%"><a [routerLink]="['/recebimento/editar/' + item.id]" class="btn btn-primary">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+              <td width="5%"><a href="javascript:void(0)" (click)="showChildModal(item.id)" class="btn btn-primary">
+              <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a></td>
+              <td><a href="#" class="btn"  [ngClass]="{ 'btn-success': item.pago === 3, 'btn-danger': item.pago === 2, 'btn-warning': item.pago === 1 }">
+                <span class="glyphicon" [ngClass]="{ 'glyphicon-ok': item.pago === 3, 'glyphicon-remove': item.pago === 2, 'glyphicon-exclamation-sign': item.pago === 1}"></span></a></td>
+              <!-- <td width="5%"><a [routerLink]="['/recebimento/editar/' + item.id]" class="btn btn-danger">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </form> 
+  </div>
+</div>
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">CondominioMais</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Confirma a baixa do recebimento?</p>
+        <button class="btn btn-primary" type="button" (click)="baixarRecebimento()">Baixar</button>
+        <button class="btn btn-danger" type="button" (click)="hideChildModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,278 @@
+<div *ngIf="recebimento">
+	<table class="w666">
+        <tbody><tr class="cpN">
+            <td class="At Ac">Instruções de Impressão</td>
+        </tr>
+        <tr class="ti">
+            <td class="At Ac">Imprimir em impressora jato de tinta (ink jet) ou laser em qualidade normal. (Não use modo econômico).<br>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) - Corte na linha indicada<br></td>
+        </tr>
+        <tr class="ti">
+            <td class="At Ac">
+				<br>
+				<form>
+					<input class="no-print" type="button" value="Clique aqui para imprimir" onclick="window.print();return false;">
+				</form>
+			</td>
+        </tr>
+    </tbody></table><br><table class="w666">
+        <tbody><tr>
+            <td class="ctN cut">
+        </td></tr>
+        <tr>
+            <td class="cpN Ar">Recibo do Pagador</td>
+        </tr>
+    </tbody></table><br><table class="w666">
+        <tbody><tr class="BHead">
+			<td class="imgLogo Al"><img src="../../assets/bancodobrasil.gif"></td>
+            <td class="barra"></td>
+			<td class="w72 Ab bc Ac">001-9</td>
+            <td class="barra"></td>
+			<td class="w500 Ar Ab ld" id="linha-digitavel-1">{{recebimento.linhaDigitavel}}</td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="ct h13 At">
+            <td class="w298">Beneficiário</td>
+            <td class="w126">Agência / Código do Beneficiário</td>
+            <td class="w34">Espécie</td>
+            <td class="w45">Quantidade</td>
+            <td class="w128">Carteira / Nosso número</td>
+        </tr>
+        <tr class="cp h12 At rBb">
+			<td> {{ recebimento.edificio.nome }}</td>
+			<td>{{recebimento.edificio.configuracao.agencia}}/{{recebimento.edificio.configuracao.convenio}}</td>
+            <td>R$</td>
+            <td></td>
+			<td class="Ar">{{recebimento.nossoNumeroComDigito}}</td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="ct h13">
+            <td class="w192">Número do documento</td>
+            <td class="w132">CPF/CNPJ</td>
+            <td class="w134">Vencimento</td>
+            <td class="w180">Valor documento</td>
+        </tr>
+        <tr class="cp h12 rBb">
+			<td>{{recebimento.nossoNumero}}</td>
+			<td>{{recebimento.apartamento.morador.cpfCnpj}}</td>
+			<td>{{recebimento.dataVencimento | date:'dd/MM/yyyy'}}</td>
+			<td class="Ar">{{recebimento.valorRecebimento | currencyformat}}</td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="ct h13">
+            <td class="w113">(-) Desconto / Abatimentos</td>
+            <td class="w112">(-) Outras deduções</td>
+            <td class="w113">(+) Mora / Multa</td>
+            <td class="w113">(+) Outros acréscimos</td>
+            <td class="w180">(=) Valor cobrado</td>
+        </tr>
+        <tr class="cp h12 rBb Ab">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="Ar">&nbsp;</td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="ct h13">
+            <td class="w659">Pagador</td>
+        </tr>
+        <tr class="cp h12">
+            <td>{{recebimento.apartamento.morador.nome}}<br>CPF: {{recebimento.apartamento.morador.cpfCnpj}}</td>
+        </tr>
+        <tr class="cp h12 rBb">
+            <td></td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="ctN h13">
+            <td class="pL6">Instruções</td>
+            <td class="w180 Ar">Autenticação mecânica</td>
+        </tr>
+        <tr class="cpN h12">
+            <td class="pL6">Sr. Caixa, aceitar o pagamento e não cobrar juros após o vencimento.</td>
+            <td class="pL6 Ar"></td>
+        </tr>
+    </tbody></table><table class="ctN w666">
+        <tbody><tr class="h13"><td></td></tr>
+        <tr class="h13"><td></td></tr>
+        <tr><td class="Ar">Corte na linha pontilhada</td></tr>
+        <tr><td class="cut"></td></tr>
+        <tr class="h13"><td></td></tr>
+        <tr class="h13"><td></td></tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="BHead">
+			<td class="imgLogo Al"><img src="../../assets/bancodobrasil.gif"></td>
+            <td class="barra"></td>
+			<td class="w72 Ab bc Ac">001-9</td>
+            <td class="barra"></td>
+			<td class="w500 Ar Ab ld" id="linha-digitavel-2">{{recebimento.linhaDigitavel}}</td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="ct h13">
+            <td class="w472">Local de pagamento</td>
+            <td class="w180">Vencimento</td>
+        </tr>
+        <tr class="cp h12 rBb">
+			<td>PAGÁVEL EM QUALQUER BANCO ATÉ O VENCIMENTO.</td>
+			<td class="Ar">{{recebimento.dataVencimento | date:'dd/MM/yyyy'}}</td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="ct h13">
+            <td class="w472">Beneficiário</td>
+            <td class="w180">Agência / Código beneficiário</td>
+        </tr>
+        <tr class="cp h12 rBb">
+			<td> {{recebimento.edificio.nome}}</td>
+			<td class="Ar">{{recebimento.edificio.configuracao.agencia}}/{{recebimento.edificio.configuracao.convenio}}</td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="ct h13">
+            <td class="w113">Data do documento</td>
+            <td class="w163">N<u>o</u> documento</td>
+            <td class="w62">Espécie doc.</td>
+            <td class="w34">Aceite</td>
+            <td class="w72">Data processamento</td>
+            <td class="w180">Carteira / Nosso número</td>
+        </tr>
+        <tr class="cp h12 rBb">
+			<td>{{today | date: 'dd/MM/yyyy'}}</td>
+			<td>{{recebimento.nossoNumero}}</td>
+            <td>DM</td>
+            <td>N</td>
+			<td>{{today | date: 'dd/MM/yyyy'}}</td>
+			<td class="Ar">{{recebimento.nossoNumeroComDigito}}</td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="ct h13">
+            <td class="w113">Uso do banco</td>
+            <td class="w83">Carteira</td>
+            <td class="w53">Espécie</td>
+            <td class="w123">Quantidade</td>
+            <td class="w72">(x) Valor</td>
+            <td class="w180">(=) Valor documento</td>
+        </tr>
+        <tr class="cp h12 rBb">
+            <td>&nbsp;</td>
+			<td class="Al">25</td>
+            <td class="Al">R$</td>
+            <td></td>
+            <td></td>
+			<td class="Ar">{{recebimento.valorRecebimento | currencyformat}}</td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="rc6">
+            <td class="w478">
+                <div class="ctN pL10">Instruções (Texto de responsabilidade do beneficiário)</div>
+				<div class="cpN pL10">Sr. Caixa, aceitar o pagamento e não cobrar juros após o vencimento.</div>
+            </td>
+            <td class="w186">
+                <div class="t">(-) Desconto / Abatimentos</div>
+                <div class="c BB"></div>
+                <div class="t">(-) Outras deduções</div>
+                <div class="c BB"></div>
+                <div class="t">(+) Mora / Multa</div>
+                <div class="c BB"></div>
+                <div class="t">(+) Outros acréscimos</div>
+                <div class="c BB"></div>
+                <div class="t">(=) Valor cobrado</div>
+                <div class="c"></div>
+            </td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="ct h13">
+            <td class="w659">Pagador</td>
+        </tr>
+        <tr class="cp h12">
+			<td class="At">{{recebimento.apartamento.morador.nome}}<br>CPF: {{recebimento.apartamento.morador.cpfCnpj}}</td>
+        </tr>
+    </tbody></table><table class="w666">
+        <tbody><tr class="rBb">
+            <td class="w478 BL">
+                <div class="cpN pL6"></div>
+            </td>
+            <td class="Ab BL">
+                <div class="ctN pL6">Cód. baixa</div>
+            </td>
+        </tr>
+    </tbody></table><table class="w666 ctN">
+        <tbody><tr>
+            <td class="pL6  w409">Sacador / Avalista</td>
+            <td class="w250 Ar">Autenticação mecânica - <b class="cpN">Ficha de Compensação</b></td>
+        </tr>
+        <tr class="h13"><td colspan="3"></td></tr>
+    </tbody></table><table class="w666">
+        <tbody><tr>
+		  <td class="EcdBar Al pL10" *ngIf="recebimento.codigoBarras">
+			
+			<code-bar-febraban [codeBar]="recebimento.codigoBarras"></code-bar-febraban>
+			
+		  </td>
+        </tr>
+    </tbody></table><table class="ctN w666">
+        <tbody><tr class="h13"><td></td></tr>
+        <tr><td class="Ar">Corte na linha pontilhada</td></tr>
+        <tr><td class="cut"></td></tr>
+    </tbody></table>
+    <table class="ctN w666">
+        <tbody><tr class="h13"><td></td></tr>
+        <tr class="h13"><td></td></tr>
+        <tr class="h13"><td></td></tr>
+        <tr class="h13"><td></td></tr>
+        <tr class="h13"><td></td></tr>
+        <tr class="h13"><td></td></tr>
+    </tbody></table>
+</div>
+  <script>
+    (function () {
+      var onLoadDocumentElement
+      var onLoadDocumentCopy
+
+      onDOMReady(function () {
+        onLoadDocumentCopy = document.body.children[0].outerHTML
+        onLoadDocumentElement = hashString(onLoadDocumentCopy);
+
+        onDOMChange(function () {
+          document.body.innerHTML = onLoadDocumentCopy;
+        })
+      })
+
+      function onDOMReady(callback) {
+        if (document.readyState === 'complete') return callback();
+
+        setTimeout(function () {
+          onDOMReady(callback);
+        }, 5);
+      }
+
+      function onDOMChange (callback) {
+        var childContent = document.body.children[0];
+
+        if (childContent) {
+          var currentDocumentElement = hashString(childContent.outerHTML);
+
+          if (onLoadDocumentElement !== currentDocumentElement) {
+            callback();
+          }
+        } else {
+          callback();
+        }
+
+        setTimeout(function () {
+          onDOMChange(callback);
+        }, 150);
+      }
+
+      function hashString (value) {
+        var hash = 0;
+
+        if (value.length === 0) return hash;
+
+        for (i = 0; i < value.length; i++) {
+          char = value.charCodeAt(i);
+          hash = ((hash<<5)-hash)+char;
+          hash = hash & hash // Convert to 32bit integer
+        }
+
+        return hash;
+      }
+    })()
+  </script>
