@@ -68,8 +68,8 @@ export class RecebimentoListarComponent extends BaseComponent implements OnInit 
   onListarComplete(entities: Recebimento[]) {
     this.recebimentos = entities;
     this.total = this.recebimentos.reduce((previous, init) => init.valorRecebimento + previous ,0);
-    this.hideToastrInfo();
     this.errors = [];
+    this.hideToastrInfo();
   }
 
   public selectedMes(value:any):void {
@@ -77,6 +77,8 @@ export class RecebimentoListarComponent extends BaseComponent implements OnInit 
   }
 
   listarRecebimentos(){
+    this.showToastrInfo(this.message.messages.SHARED.MSG_LISTING);
+
     if (this.mes == undefined) this.mes = new Date().getMonth() + 1;
     let ano = this.formulario.get("ano").value;
 

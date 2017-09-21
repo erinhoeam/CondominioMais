@@ -6,7 +6,8 @@ import { ServiceBase } from "app/services/service.base";
 import { Recebimento } from './../models/recebimento';
 import { RecebimentoBoletoUsuario } from './../models/recebimento-boletos-usuarios';
 import { ApartamentoBoleto } from './../models/apartamento-boleto';
-import { RecebimentoBoletos } from './../models/recebimento-boletos'
+import { RecebimentoBoletos } from './../models/recebimento-boletos';
+import { RecebimentoInadimplente } from './../models/recebimento-inadimplente';
 
 
 @Injectable()
@@ -69,6 +70,13 @@ export class RecebimentoService extends ServiceBase {
                         .catch(super.serviceError);
   }
 
+  listarInadimplentes() : Observable<RecebimentoInadimplente[]>{
+    let options = this.obterAuthHeader();
+
+    return this.http.get(`${this.UrlServiceV1}recebimento-inadimplentes`, options)
+                    .map((res:Response) => <RecebimentoInadimplente[]>res.json())
+                    .catch(super.serviceError);
+}
   
   listarBoletosUsuario() : Observable<ApartamentoBoleto[]>{
     let options = this.obterAuthHeader();

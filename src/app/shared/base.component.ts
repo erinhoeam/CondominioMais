@@ -73,7 +73,7 @@ export abstract class BaseComponent {
 
     showToastrInfo(msg:string){
         this.loading = true;
-        this.toastr.info(msg,'Concurseiro Amigo', { dismiss: 'controlled' })
+        this.toastr.info(msg,this.message.titles.SISTEMA.TITLE, { dismiss: 'controlled' })
         .then((toast: Toast) =>
         {
             this.toastActual = toast;
@@ -82,6 +82,7 @@ export abstract class BaseComponent {
     }
 
     hideToastrInfo(){
+        this.loading = false;
         this.toastr.dismissToast(this.toastActual);
     }
     verifyUnauthorized(response:Response) : boolean {

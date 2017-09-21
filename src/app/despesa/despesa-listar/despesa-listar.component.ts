@@ -4,6 +4,7 @@ import { Component, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { BaseComponent } from "./../../shared/base.component";
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 import { Despesa } from './../../models/despesa';
 import { HomeService } from './../../services/home.service';
@@ -19,8 +20,10 @@ import { SelectComponent, SelectItem } from "ng2-select";
 })
 export class DespesaListarComponent extends BaseComponent implements OnInit {
   @ViewChild('SelectMeses') selectMeses: SelectComponent;
+  @ViewChild('childModal') public childModal:ModalDirective;
 
   despesas:Despesa[];
+  despesa:Despesa;
   itensMeses:any[];
   formulario: FormGroup;
   mes:number;
@@ -34,6 +37,7 @@ export class DespesaListarComponent extends BaseComponent implements OnInit {
               private fb:FormBuilder) {
       super(toastr,vcr,routerC);
       this.title = this.message.titles.DESPESA.TITLE_LIST;
+      this.despesa = new Despesa();
   }
 
   ngOnInit() {
@@ -71,6 +75,7 @@ export class DespesaListarComponent extends BaseComponent implements OnInit {
   }
 
   listarDespesas(){
+    this.showToastrInfo(this.message.messages.SHARED.MSG_LISTING);
     if (this.mes == undefined) this.mes = new Date().getMonth() + 1;
     let ano = this.formulario.get("ano").value;
 
@@ -78,5 +83,25 @@ export class DespesaListarComponent extends BaseComponent implements OnInit {
       .subscribe(
         response => { this.onListarComplete(response) },
         error => { this.onError(error) });
+  }
+  public showChildModal(id:String):void {
+    this.despesa.id = id;
+    this.childModal.show();
+  }
+  public hideChildModal():void {
+    this.childModal.hide();
+  }
+  public baixarDespesa(){
+    this.despesaService.baixar(this.despesa)
+    .subscribe(
+    result => { this.onSaveComplete(result) },
+    error => { this.onError(error) });
+  }
+  onSaveComplete(response: any) {
+    this.hideChildModal();
+    this.hideToastrInfo();
+    this.errors = [];
+    this.showToastrSuccess(this.message.messages.SHARED.MSG_SAVE_SUCCESS,this.message.titles.SISTEMA.TITLE,null);
+    this.listarDespesas();
   }
 }

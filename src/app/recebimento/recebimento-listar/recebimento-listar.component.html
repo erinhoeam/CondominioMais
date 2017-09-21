@@ -18,7 +18,7 @@
             <input class="form-control" type="number" id="ano" formControlName="ano" placeholder="Ano" />
           </div>
           <div class="col-md-2">
-            <button class="btn btn-primary" (click)="listarRecebimentos()">Listar</button>
+            <button [disabled]="loading" class="btn btn-primary" (click)="listarRecebimentos()">Listar</button>
           </div>
         </div>
       <hr />
@@ -39,7 +39,6 @@
           <th>Editar</th>
           <th>Baixar</th>
           <th>Status</th>
-          <!-- <th>Excluir</th> -->
         </tr>
         <tbody>
           <tr *ngFor='let item of recebimentos'>
@@ -51,12 +50,10 @@
               <td width="10%">{{item.valorPago | currencyformat}}</td>
               <td width="5%"><a [routerLink]="['/recebimento/editar/' + item.id]" class="btn btn-primary">
               <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-              <td width="5%"><a href="javascript:void(0)" (click)="showChildModal(item.id)" class="btn btn-primary">
-              <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a></td>
+              <td width="5%"><button [disabled]="item.pago === 3" href="javascript:void(0)" (click)="showChildModal(item.id)" class="btn btn-primary">
+              <span class="glyphicon glyphicon-download" aria-hidden="true"></span></button></td>
               <td><a href="#" class="btn"  [ngClass]="{ 'btn-success': item.pago === 3, 'btn-danger': item.pago === 2, 'btn-warning': item.pago === 1 }">
                 <span class="glyphicon" [ngClass]="{ 'glyphicon-ok': item.pago === 3, 'glyphicon-remove': item.pago === 2, 'glyphicon-exclamation-sign': item.pago === 1}"></span></a></td>
-              <!-- <td width="5%"><a [routerLink]="['/recebimento/editar/' + item.id]" class="btn btn-danger">
-              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td> -->
           </tr>
         </tbody>
       </table>
@@ -74,8 +71,8 @@
       </div>
       <div class="modal-body">
         <p>Confirma a baixa do recebimento?</p>
-        <button class="btn btn-primary" type="button" (click)="baixarRecebimento()">Baixar</button>
-        <button class="btn btn-danger" type="button" (click)="hideChildModal()">Cancelar</button>
+        <button [disabled]="loading" class="btn btn-primary" type="button" (click)="baixarRecebimento()">Baixar</button>
+        <button [disabled]="loading" class="btn btn-danger" type="button" (click)="hideChildModal()">Cancelar</button>
       </div>
     </div>
   </div>

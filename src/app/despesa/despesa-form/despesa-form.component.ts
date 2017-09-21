@@ -36,6 +36,7 @@ export class DespesaFormComponent extends BaseComponent implements OnInit, After
   success:boolean = false;
   formulario: FormGroup;
   myDatePickerOptions = DateUtils.getMyDatePickerOptions(false);
+  showQuantidade:boolean;
 
   constructor(public toastr: ToastsManager, 
               vcr: ViewContainerRef,
@@ -59,6 +60,10 @@ export class DespesaFormComponent extends BaseComponent implements OnInit, After
         },
         valorDespesa: {
             required: this.message.messages.DESPESA.VALOR_DESPESA
+        },
+        quantidade:{
+          required: this.message.messages.DESPESA.QUANTIDADE,
+          range: this.message.messages.DESPESA.QUANTIDADE
         }          
     };
     this.despesa = new Despesa();
@@ -70,7 +75,9 @@ export class DespesaFormComponent extends BaseComponent implements OnInit, After
       fornecedorId: ['', Validators.required],
       centroCustoId: ['',Validators.required],
       dataVencimento:['',Validators.required],
-      valorDespesa:['',Validators.required]
+      valorDespesa:['',Validators.required],
+      repetir: false,
+      quantidade: 0
     });
 
     this.fornecedorService.listar()
@@ -170,5 +177,14 @@ export class DespesaFormComponent extends BaseComponent implements OnInit, After
                         },
         valorDespesa: this.despesa.valorDespesa
     });
+  }
+  exibirQuantidade(){
+    this.showQuantidade=!this.showQuantidade;
+    if (this.showQuantidade){
+      this.formulario.controls["quantidade"].setValidators([Validators.required,CustomValidators.range([1, 300])]);
+    }
+    else{
+      this.formulario.controls["quantidade"].setValidators([]);
+    }
   }    
 }

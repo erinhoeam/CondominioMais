@@ -64,6 +64,7 @@ export class ApartamentoListarComponent extends BaseComponent implements OnInit 
   }
 
   listarApartamentos(){
+    this.showToastrInfo(this.message.messages.SHARED.MSG_LISTING);
     if (!this.edificioId){
       this.edificioId = "00000000-0000-0000-0000-000000000000";
     }

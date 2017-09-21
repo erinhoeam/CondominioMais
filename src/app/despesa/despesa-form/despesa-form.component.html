@@ -40,6 +40,25 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            <div class="checkbox">
+              <label>
+                <input (click)="exibirQuantidade()" type="checkbox" formControlName="repetir" /> Repetir
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="showQuantidade" [ngClass]="aplicarCssErro(displayMessage.quantidade)">
+          <label class="col-md-2 control-label" for="quantidade">Quantidade</label>
+          <div class="col-md-6">
+            <input type="number" class="form-control" formControlName="quantidade" />
+            <app-template-control-form-error [notInline]="false" [msgError]="displayMessage.quantidade" *ngIf="displayMessage.quantidade">
+            </app-template-control-form-error>            
+          </div>
+        </div>      
+
         <div class="form-group" [ngClass]="aplicarCssErro(displayMessage.valorDespesa)">
           <label class="col-md-2 control-label" for="valorDespesa">Valor</label>
           <div class="col-md-6">

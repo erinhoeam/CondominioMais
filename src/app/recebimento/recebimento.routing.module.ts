@@ -8,6 +8,7 @@ import { RecebimentoFormComponent } from './recebimento-form/recebimento-form.co
 import { RecebimentoListarComponent } from './recebimento-listar/recebimento-listar.component';
 import { RecebimentoBoletoComponent } from './recebimento-boleto/recebimento-boleto.component';
 import { RecebimentosBoletosComponent } from './recebimentos-boletos/recebimentos-boletos.component';
+import { RecebimentoInadimplentesComponent } from './recebimento-inadimplentes/recebimento-inadimplentes.component';
 
 const ROUTES: Routes = [
     { path: '', canActivate: [AuthService], component: RecebimentoMainComponent, 
@@ -15,6 +16,7 @@ const ROUTES: Routes = [
     { path: 'listar', canActivate: [AuthService], component: RecebimentoListarComponent, data: [{ claim: { nome: 'Recebimento', valor: 'Ler' } }] },  
     { path: 'novo', canActivate: [AuthService], component: RecebimentoFormComponent, data: [{ claim: { nome: 'Recebimento', valor: 'Gravar' } }] },
     { path: 'boletos', canActivate: [AuthService], component: RecebimentosBoletosComponent, data: [{ claim: { nome: 'Recebimento', valor: 'Gravar' } }] },
+    { path: 'inadimplentes', canActivate: [AuthService], component: RecebimentoInadimplentesComponent, data: [{ claim: { nome: 'Recebimento', valor: 'Ler' } }] },
     { path: 'editar/:id', canActivate: [AuthService], component: RecebimentoFormComponent, data: [{ claim: { nome: 'Recebimento', valor: 'Gravar' } }] },
     { path: 'boleto/:id', component: RecebimentoBoletoComponent }
     ]}

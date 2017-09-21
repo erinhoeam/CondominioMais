@@ -17,7 +17,7 @@
             <input class="form-control" type="number" id="ano" formControlName="ano" placeholder="Ano" />
           </div>
           <div class="col-md-2">
-            <button class="btn btn-primary" (click)="listarDespesas()">Listar</button>
+            <button [disabled]="loading" class="btn btn-primary" (click)="listarDespesas()">Listar</button>
           </div>
         </div>
       <hr />
@@ -33,8 +33,10 @@
           <th>Centro de Custo</th>
           <th>Vencimento</th>
           <th>Valor</th>
+          <th>Pago</th>
           <th>Editar</th>
-          <th>Excluir</th>
+          <th>Baixar</th>
+          <th>Status</th>
         </tr>
         <tbody>
           <tr *ngFor='let item of despesas'>
@@ -42,13 +44,33 @@
               <td width="30%">{{item.centroCusto.nome}}</td>
               <td width="15%">{{item.dataVencimento | date: 'dd/MM/yyyy'}}</td>
               <td width="10%">{{item.valorDespesa | currencyformat}}</td>
+              <td width="10%">{{item.valorPago | currencyformat}}</td>
               <td width="5%"><a [routerLink]="['/despesa/editar/' + item.id]" class="btn btn-primary">
               <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-              <td width="5%"><a [routerLink]="['/despesa/editar/' + item.id]" class="btn btn-primary">
-              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+              <td width="5%"><button [disabled]="item.pago === 3" href="javascript:void(0)" (click)="showChildModal(item.id)" class="btn btn-primary">
+                <span class="glyphicon glyphicon-download" aria-hidden="true"></span></button></td>
+                <td><a href="#" class="btn"  [ngClass]="{ 'btn-success': item.pago === 3, 'btn-danger': item.pago === 2, 'btn-warning': item.pago === 1 }">
+                  <span class="glyphicon" [ngClass]="{ 'glyphicon-ok': item.pago === 3, 'glyphicon-remove': item.pago === 2, 'glyphicon-exclamation-sign': item.pago === 1}"></span></a></td>
           </tr>
         </tbody>
       </table>
     </form> 
+  </div>
+</div>
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">CondominioMais</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Confirma o pagamento da despesa?</p>
+        <button [disabled]="loading" class="btn btn-primary" type="button" (click)="baixarDespesa()">Confirmar</button>
+        <button [disabled]="loading" class="btn btn-danger" type="button" (click)="hideChildModal()">Cancelar</button>
+      </div>
+    </div>
   </div>
 </div>

@@ -42,7 +42,8 @@ export class MessageResource{
                 FORNECEDOR_REQUIRED: 'Fornecedor requerido.' ,
                 CENTRO_CUSTO_REQUIRED: 'Centro de custo requerido.',
                 DATA_VENCIMENTO_REQUIRED: 'Data de vencimento requerida.' ,
-                VALOR_DESPESA: 'Valor requerido.'
+                VALOR_DESPESA: 'Valor requerido.',
+                QUANTIDADE: 'Quantidade deve ser maior que zero e menor que 300.'
             },
             RECEBIMENTO: {
                 TIPO_RECEBIMENTO_REQUIRED: 'Tipo recebimento requerido.' ,
@@ -50,6 +51,7 @@ export class MessageResource{
                 DATA_VENCIMENTO_REQUIRED: 'Data de vencimento requerida.',
                 VALOR_RECEBIMENTO_REQUIRED: 'Valor requerido.',
                 VALOR_TAXA_EXTRA_INVALID: 'Valor taxa extra inválido.', 
+                QUANTIDADE: 'Quantidade deve ser maior que zero e menor que 300.'
             },
             EDIFICIO: {
                 NOME_REQUIRED: 'Nome requerido.',
@@ -136,6 +138,9 @@ export class MessageResource{
         };
 
         this.titles = { 
+            SISTEMA: {
+                TITLE: 'CondomínioMais'
+            },
             APARTAMENTO: {
                 TITLE_UPDATE: 'Atualizar Apartamento',
                 TITLE_NEW: 'Novo Apartamento',
@@ -170,7 +175,8 @@ export class MessageResource{
                 TITLE_UPDATE: 'Atualizar Recebimento',
                 TITLE_NEW: 'Novo Recebimento',
                 TITLE_LIST: 'Recebimentos',
-                GERAR_BOLETOS_AP: 'Gerar Boletos Apartamentos' 
+                GERAR_BOLETOS_AP: 'Gerar Boletos Apartamentos',
+                TITLE_INADIMPLENTE: 'Inadimplentes' 
             },
             ALTERAR_SENHA: {
                 TITLE: 'Alterar Senha'

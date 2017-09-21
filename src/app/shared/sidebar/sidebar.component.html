@@ -6,7 +6,8 @@
     <li *ngIf="verificarPermissao('CentroCusto','Ler')" routerLinkActive="active"><a href="javascript:void(0)" [routerLink]="['/centrocusto/listar']">Centro de Custo</a></li>
     <li *ngIf="verificarPermissao('Cliente','Ler')" routerLinkActive="active"><a href="javascript:void(0)" [routerLink]="['/cliente/listar']">Cliente</a></li>
     <li *ngIf="verificarPermissao('Despesa','Gravar')" routerLinkActive="active"><a href="javascript:void(0)" [routerLink]="['/despesa/listar']">Despesas</a></li>
-    <li *ngIf="verificarPermissao('CentroCusto','Gravar')" routerLinkActive="active"><a href="javascript:void(0)" [routerLink]="['/recebimento/listar']">Recebimentos</a></li>
+    <li *ngIf="verificarPermissao('Recebimento','Ler')" routerLinkActive="active"><a href="javascript:void(0)" [routerLink]="['/recebimento/listar']">Recebimentos</a></li>
+    <li *ngIf="verificarPermissao('Recebimento','Ler')" routerLinkActive="active"><a href="javascript:void(0)" [routerLink]="['/recebimento/inadimplentes']">Inadimplentes</a></li>
 </ul>
 <!--<ul class="nav nav-sidebar">
     <li><a href="">Nav item</a></li>
