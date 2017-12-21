@@ -8,6 +8,9 @@ export class Despesa{
     centroCustoId:String;
     dataVencimento:Date;
     valorDespesa:number;
+    valorPago:number;
+    repetir:boolean;
+    quantidade:number;
     edificio:Edificio;
     fornecedor:Fornecedor;
     centroCusto:CentroCusto;

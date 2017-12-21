@@ -54,7 +54,7 @@ export class LoginComponent extends BaseComponent implements OnInit, AfterViewIn
       },
       senha:{
           required: this.message.messages.ALTERAR_SENHA.SENHA_NOVA_REQUIRED,
-          minlength: this.message.messages.ALTERAR_SENHA.NOME_MIN_LENGTH
+          minlength: this.message.messages.ALTERAR_SENHA.SENHA_NOVA_MIN_LENGTH
       }
     };
 

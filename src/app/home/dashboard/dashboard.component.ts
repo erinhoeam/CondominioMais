@@ -29,7 +29,7 @@ export class DashboardComponent extends BaseComponent {
   public despesas:Despesa[];
   public boletos:ApartamentoBoleto[];
   public balanco:BalancoEdificio;
-  public meses:any[];
+  public itensMeses:any[];
   formulario: FormGroup;
   mes:number;
   total:Number;
@@ -60,8 +60,7 @@ export class DashboardComponent extends BaseComponent {
     this.homeService.listarMeses()
     .subscribe(
       api => {
-        this.meses = api;
-        this.meses.forEach(item => {
+        api.forEach(item => {
           item.mes = item.mes.toString();
           this.selectMeses.itemObjects.push(new SelectItem({ id: item.mes, text: item.nome }));
         })

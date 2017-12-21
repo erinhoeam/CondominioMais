@@ -51,4 +51,14 @@ export class DespesaService extends ServiceBase {
                         .map((res:Response) => <Despesa>res.json())
                         .catch(super.serviceError);
   }
+  baixar(entity:Despesa) : Observable<Despesa>{
+      let options = this.obterAuthHeader();
+  
+      let response = this.http
+          .put(`${this.UrlServiceV1}baixar-despesa`, entity, options)
+          .map(super.extractData)
+          .catch(super.serviceError);
+  
+      return response;
+  }
 }

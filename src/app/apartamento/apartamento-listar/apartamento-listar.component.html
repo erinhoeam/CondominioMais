@@ -15,7 +15,7 @@
               (selected)="selectedEdificio($event.id)" ></ng-select>
         </div>
         <div class="col-md-4">
-          <button class="btn btn-primary" (click)="listarApartamentos()">Listar</button>
+          <button [disabled]="loading" class="btn btn-primary" (click)="listarApartamentos()">Listar</button>
         </div>
       </div>
     <hr />

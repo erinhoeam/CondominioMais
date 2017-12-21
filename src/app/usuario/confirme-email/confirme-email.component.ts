@@ -64,9 +64,8 @@ export class ConfirmeEmailComponent extends BaseComponent implements OnInit, Aft
         (params:any) => {
             
             this.id = params['id'];;
-            this.code = params['code'];
 
-            this.confirmEmail = new ConfirmaEmail(this.id, this.code);
+            this.confirmEmail = new ConfirmaEmail(this.id);
         } 
     );
   }

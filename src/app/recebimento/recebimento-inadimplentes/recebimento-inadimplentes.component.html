@@ -1,0 +1,43 @@
+<app-menu-superior></app-menu-superior>
+<div class="row">
+  <div class="col-sm-3 col-md-2 sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">{{title}}</h1>
+        <div class="row">
+          <div class="col-md-2">
+            <button [disabled]="loading" class="btn btn-primary" (click)="listar()">Listar</button>
+          </div>
+        </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          <span class="bold">Total:&nbsp;</span><span>{{total | currencyformat}}</span>
+        </div>
+        <br />
+      </div>
+      <table class="table table-striped" *ngIf="recebimentos != null && recebimentos.length>0">
+        <tr>
+          <th>Apartamento</th>
+          <th>Cliente</th>
+          <th>Vencimento</th>
+          <th>Valor</th>
+          <th>Pago</th>
+          <th>Dias Atraso</th>
+          <th>Tipo</th>
+        </tr>
+        <tbody>
+          <tr *ngFor='let item of recebimentos'>
+              <td width="5%">{{ item.apartamento ? item.apartamento.numero : ''}}</td>
+              <td width="40%">{{item.cliente ? item.cliente.nome: ''}}</td>
+              <td width="15%">{{item.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+              <td width="10%">{{item.valorRecebimento | currencyformat}}</td>
+              <td width="10%">{{item.valorPago | currencyformat}}</td>
+              <td width="10%">{{item.diasEmAtraso}}</td>
+              <td width="10%">{{item.recebimento}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>

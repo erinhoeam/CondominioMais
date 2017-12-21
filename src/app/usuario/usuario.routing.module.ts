@@ -15,8 +15,8 @@ const ROUTES: Routes = [
     children : [
       { path: 'registrar', canActivate: [AuthService], component: RegistroComponent, data: [{ claim: { nome: 'Usuario', valor: 'Gravar' } }]},
       { path: 'alterar-senha', canActivate: [AuthService], component: AlterarSenhaComponent},
-      { path: 'confirmacao/:id/:code', component:ConfirmeEmailComponent},
-      { path: 'resetar/:id/:code', component:ResetarSenhaComponent}
+      { path: 'confirmacao/:id', component:ConfirmeEmailComponent},
+      { path: 'resetar/:id', component:ResetarSenhaComponent}
     ]
   }
 ];

@@ -56,7 +56,6 @@ export class ResetarSenhaComponent extends BaseComponent implements OnInit, Afte
             this.resetarModel = new ResetarSenha();
 
             this.resetarModel.Id = params['id'];
-            this.resetarModel.Code = params['code'];
         } 
     );
 
@@ -64,15 +63,11 @@ export class ResetarSenhaComponent extends BaseComponent implements OnInit, Afte
     let senhaConfirmacao = new FormControl('', [Validators.required, Validators.minLength(6), CustomValidators.equalTo(senha)]);
 
     this.formulario = this.fb.group({
-      Id: '',
-      Code: '',
       senha: senha,
       confirmeSenha: senhaConfirmacao
     });
 
     this.formulario.setValue({
-      Id: this.resetarModel.Id,
-      Code: this.resetarModel.Code,
       senha:'',
       confirmeSenha:''
     });
@@ -89,8 +84,11 @@ export class ResetarSenhaComponent extends BaseComponent implements OnInit, Afte
   resetar(){
     if (this.formIsValid(this.formulario)){
           this.showToastrInfo(this.message.messages.SHARED.MSG_SAVING);
-          let p = Object.assign({}, this.resetarModel, this.formulario.value);  
-          this.usuarioService.resetarSenha(p)
+         
+          this.resetarModel.Senha = this.formulario.get("senha").value;
+          this.resetarModel.ConfirmeSenha = this.formulario.get("confirmeSenha").value;
+
+          this.usuarioService.resetarSenha(this.resetarModel)
           .subscribe(
               result => { this.onCompleteSuccess(result,
                 this.message.messages.SHARED.MSG_SAVE_SUCCESS,

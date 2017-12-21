@@ -4,8 +4,6 @@
 			<h1>DV - Resetar Senha</h1>
       <app-template-form-control-summary [errors]="errors"></app-template-form-control-summary>
 			<form role="form" (ngSubmit)="resetar()" novalidate [formGroup]="formulario">
-				<input type="hidden" formControlName="Id" id="Id" />
-        <input type="hidden" formControlName="Code" id="Code" />
         <div class="form-content">
 					<div class="form-group">
             <input class="form-control input-underline input-lg" id="senha" formControlName="senha" type="password" placeholder="Senha (requerido)" />

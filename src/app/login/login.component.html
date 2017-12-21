@@ -37,7 +37,7 @@
 			    <form role="form" (ngSubmit)="loginUsuario()" novalidate [formGroup]="formulario">
 					<div class="input-group" [ngClass]="aplicarCssErro(displayMessage.email)">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input class="form-control input-underline input-lg" id="email" formControlName="email" type="text" placeholder="Email (requerido)" />
+						<input [disabled]="loading" class="form-control input-underline input-lg" id="email" formControlName="email" type="text" placeholder="Email (requerido)" />
 					</div>
 					<app-template-control-form-error [formFeedBack]="false" [notInline]="false" [msgError]="displayMessage.email" *ngIf="displayMessage.email">
 					</app-template-control-form-error>
@@ -45,7 +45,7 @@
 										
 					<div class="input-group" [ngClass]="aplicarCssErro(displayMessage.senha)">
 						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-						<input class="form-control input-underline input-lg" id="senha" formControlName="senha" type="password" placeholder="Senha (requerido)" />
+						<input [disabled]="loading" class="form-control input-underline input-lg" id="senha" formControlName="senha" type="password" placeholder="Senha (requerido)" />
 					</div>
 					<app-template-control-form-error [formFeedBack]="false" [notInline]="false" [msgError]="displayMessage.senha" *ngIf="displayMessage.senha">
 					</app-template-control-form-error>

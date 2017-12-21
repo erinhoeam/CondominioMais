@@ -17,6 +17,7 @@ const ROUTES: Routes = [
             { path: 'cliente', loadChildren: './../cliente/cliente.module#ClienteModule' },
             { path: 'despesa', loadChildren: './../despesa/despesa.module#DespesaModule' },
             { path: 'recebimento', loadChildren: './../recebimento/recebimento.module#RecebimentoModule' },
+            { path: 'logging', loadChildren: './../logging/logging.module#LoggingModule' },
         ]
     }
 ];
