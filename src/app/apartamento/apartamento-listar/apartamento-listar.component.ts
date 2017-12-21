@@ -35,7 +35,6 @@ export class ApartamentoListarComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit() {
-    this.showToastrInfo(this.message.messages.SHARED.MSG_LISTING);
 
     this.listarApartamentos();
     

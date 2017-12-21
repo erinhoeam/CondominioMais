@@ -183,6 +183,9 @@ export class MessageResource{
             },
             USUARIO: {
                 TITLE: 'Cadastrar Usuário'
+            },
+            LOG: {
+                TITLE: 'Log Sistema'
             }
         };
     }

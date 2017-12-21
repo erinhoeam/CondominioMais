@@ -1,0 +1,55 @@
+<app-menu-superior></app-menu-superior>
+<div class="row">
+  <div class="col-sm-3 col-md-2 sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">{{title}}</h1>
+      <br /><br />
+      <div class="row">
+        <div class="col-sm-12"><span><b>Id:</b>&nbsp;{{log.id}}</span></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12"><span><b>Data:</b>&nbsp;{{log.dateTime | date: 'dd/MM/yyyy HH:mm:ss'}}</span></div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12"><span><b>User:</b>&nbsp;{{log.user}}</span></div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12"><span><b>StatusCode:</b>&nbsp;{{log.statusCode}}</span></div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12"><span><b>Hostname:</b>&nbsp;{{log.hostname}}</span></div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12"><span><b>Method:</b>&nbsp;{{log.method}}</span></div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12"><span><b>Url:</b>&nbsp;{{log.url}}</span></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <span><b>Source</b></span>
+          <p>{{log.source}}</p>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="col-sm-12">
+          <span><b>Message</b></span>
+          <p>{{log.exceptionMessage}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <span><b>StackTrace</b></span>
+          <p>{{log.stackTrace}}</p>
+        </div>
+      </div>
+      <div class="row" *ngIf="log.innerExceptionMessage">
+        <div class="col-sm-12">
+          <span><b>InnerExceptionMessage</b></span>
+          <p>{{log.innerExceptionMessage}}</p>
+        </div>
+      </div>     
+  </div>
+</div>
